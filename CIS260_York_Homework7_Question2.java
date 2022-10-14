@@ -6,12 +6,11 @@
 package csu.cis260_york_homework7_question2;
 
 //imports
-import java.util.Scanner;
-import java.util.Random;
-import java.util.Objects;
 import java.io.*;
 import java.net.*;
-import java.text.BreakIterator;
+import java.util.Objects;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -52,7 +51,6 @@ public class CIS260_York_Homework7_Question2 {
         for (i = 0; i < word.length(); i++) 
         {
             splitWord[i] = Character.toString(word.charAt(i));
-            System.out.print(splitWord[i] + " ");
         }
         System.out.println("");                 //Spacing for terminal visibility
 
@@ -70,48 +68,90 @@ public class CIS260_York_Homework7_Question2 {
         System.out.println("");
 
         
+
+
+
+
+
+
+
+
+
+
+
+
         // ------------------------------------------- USER PROMPTS ------------------------------------------- //
+        // variables
         boolean isComplete = false;
         boolean isGuess = false;
         int counter = 0;
         String coveredSplitWordString;
+        int asterisks = 0;
         
+        // scanner
         Scanner input = new Scanner(System.in);
 
+        // loop
         for (i = 0; i < word.length(); i++)
         {
+            // USER PROMPT
             System.out.print("\nGuess a letter in the word: ");
             String userInput = input.next();
 
+            // nested Loop
             for (int j = 0; j < word.length(); j++) 
             {
+                // if guess is correct
                 if (Objects.equals(userInput, splitWord[j]))
                 {
+                    // uncover letter
                     coveredSplitWord[j] = userInput;
                     isGuess = true;
                 }
-                else 
+                // if guess is wrong
+                else
                 {
                     isGuess = false;
                     counter++;
                 }
-                    // if (!coveredSplitWordString.contains("*"))
-                    // {
-                    //     System.out.println("Congradulations! You Won!");
-                    //     break;
-                    // }
-            coveredSplitWordString = String.valueOf(coveredSplitWord[j]);
-            //System.out.print(coveredSplitWord[j]);
-            System.out.print(coveredSplitWordString);
 
+                // turn covered split word into a string
+                coveredSplitWordString = String.valueOf(coveredSplitWord[j]);
+
+                //print covered split word so user can see how many letters are left, ect.
+                //System.out.print(coveredSplitWord[j]);
+                System.out.print(coveredSplitWordString);
+
+                for (int k = 0; k < coveredSplitWordString.length(); k++) 
+                {
+                    asterisks = 0; // PROBLEM: ANYTIME I ENTER THE LAST LETTER IT WILL SAY I WON...
+                    if (coveredSplitWordString.charAt(k) == '*') {
+                        asterisks++;
+                    }
+                }
             }
-        System.out.println("");
+            if (asterisks == 0)
+            {
+                System.out.println("\n\nYou Won!\n");
+                break;
+            }
+
+            System.out.println(""); // terminal visibility
         }
 
-        if (isComplete == true)
-        {
-            System.out.println("You Won!");
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // ------------------------------------------- USER WINS/LOSES ------------------------------------------- //
         for (i = 0; i < word.length(); i++)
