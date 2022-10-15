@@ -8,6 +8,7 @@ package csu.cis260_york_homework7_question2;
 //imports
 import java.io.*;
 import java.net.*;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
@@ -16,14 +17,28 @@ import java.util.Scanner;
  *
  * @author spenceryork
  */
+
+ /*                                                      
+  *                                                                                 _          __ _ _      
+  *                                                                                (_)        / _(_) |     
+  *                                                       ___ _ __ _ __ ___  _ __   _ _ __   | |_ _| | ___ 
+  *                                                      / _ \ '__| '__/ _ \| '__| | | '_ \  |  _| | |/ _ \
+  *                                                     |  __/ |  | | | (_) | |    | | | | | | | | | |  __/
+  *                                                      \___|_|  |_|  \___/|_|    |_|_| |_| |_| |_|_|\___|
+  * 
+  */
 public class CIS260_York_Homework7_Question2 {
 
-    public static void main(String[] args) throws Exception {
-        System.out.println("");                 // Spacing for terminal visibility
+    public static void main(String[] args) {
         
-        int wrongGuess = 0;
+        userPrompts(args);
+    }
 
-        // ------------------------------------------- RANDOM WORD GENERATOR ------------------------------------------- //
+
+    // ------------------------------------------- RANDOM WORD GENERATOR ------------------------------------------- //
+    public static String wordGenerator(String[] args) throws Exception {
+        System.out.println("");                 // Spacing for terminal visibility
+
         String[] words = new String[6801];
 
         // Create Word List
@@ -52,51 +67,60 @@ public class CIS260_York_Homework7_Question2 {
         {
             splitWord[i] = Character.toString(word.charAt(i));
         }
-        System.out.println("");                 //Spacing for terminal visibility
+        System.out.println("");  
+                       //Spacing for terminal visibility
+        return word;
+    }
 
-        
-        // ------------------------------------------- HIDE WORD FROM USER ------------------------------------------- //
+
+    // ------------------------------------------- HIDE WORD FROM USER ------------------------------------------- //
+    public static String coverWord(String[] args) {
+
+        wordGenerator();
         // Use asteriks
         String[] coveredSplitWord = new String[word.length()];
 
-        for (i = 0; i < word.length(); i++) 
+        for (int i = 0; i < word.length(); i++) 
         {
             coveredSplitWord[i] = Character.toString(word.charAt(i));
             coveredSplitWord[i] = "*";
             System.out.print(coveredSplitWord[i]);
+            return coveredSplitWord[i];
         }
         System.out.println("");
 
         
+    }
 
 
+    // ------------------------------------------- USER PROMPTS ------------------------------------------- //
+    public static void userPrompts(String[] args) {
+        word();
+        coverWord();
 
-
-
-
-
-
-
-
-
-
-        // ------------------------------------------- USER PROMPTS ------------------------------------------- //
-        // variables
-        boolean isComplete = false;
-        boolean isGuess = false;
         int counter = 0;
-        String coveredSplitWordString;
-        int asterisks = 0;
         
         // scanner
         Scanner input = new Scanner(System.in);
 
         // loop
-        for (i = 0; i < word.length(); i++)
+        while(true)
         {
             // USER PROMPT
             System.out.print("\nGuess a letter in the word: ");
             String userInput = input.next();
+
+            if (Arrays.asList(coveredSplitWord).contains(userInput)) {
+                // TODO logo and continue if true
+                System.out.print("Word already guessed correctly");
+                continue;
+            }
+
+            if (!word.contains(userInput)) {
+                
+                counter++;
+                System.out.print(userInput + " is not in the word.");
+            }
 
             // nested Loop
             for (int j = 0; j < word.length(); j++) 
@@ -106,69 +130,15 @@ public class CIS260_York_Homework7_Question2 {
                 {
                     // uncover letter
                     coveredSplitWord[j] = userInput;
-                    isGuess = true;
-                }
-                // if guess is wrong
-                else
-                {
-                    isGuess = false;
-                    counter++;
-                }
-
-                // turn covered split word into a string
-                coveredSplitWordString = String.valueOf(coveredSplitWord[j]);
-
-                //print covered split word so user can see how many letters are left, ect.
-                //System.out.print(coveredSplitWord[j]);
-                System.out.print(coveredSplitWordString);
-
-                for (int k = 0; k < coveredSplitWordString.length(); k++) 
-                {
-                    asterisks = 0; // PROBLEM: ANYTIME I ENTER THE LAST LETTER IT WILL SAY I WON...
-                    if (coveredSplitWordString.charAt(k) == '*') {
-                        asterisks++;
-                    }
+        
                 }
             }
-            if (asterisks == 0)
-            {
-                System.out.println("\n\nYou Won!\n");
-                break;
-            }
 
-            System.out.println(""); // terminal visibility
+            if (!Arrays.asList(coveredSplitWord).contains("*")) {
+                System.out.println("\n\nYou guessed the word!\n Y/N");
+                break;  
+            }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // ------------------------------------------- USER WINS/LOSES ------------------------------------------- //
-        for (i = 0; i < word.length(); i++)
-        {   
-            if (Objects.equals(coveredSplitWord[i], ("*")))
-            {
-                isComplete = false;
-                break;
-            }
-            // else if (!Objects.equals(coveredSplitWord[i], ("*")))
-            // {
-            //     isComplete = true;
-            // }
-        }
-        System.out.println("isComplete: " + isComplete);
-        System.out.println("wrong guess: "  + wrongGuess);
-        System.out.println("counter: " + counter);
     }
 }
 /*
