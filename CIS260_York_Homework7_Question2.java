@@ -17,28 +17,12 @@ import java.util.Scanner;
  *
  * @author spenceryork
  */
-
- /*                                                      
-  *                                                                                 _          __ _ _      
-  *                                                                                (_)        / _(_) |     
-  *                                                       ___ _ __ _ __ ___  _ __   _ _ __   | |_ _| | ___ 
-  *                                                      / _ \ '__| '__/ _ \| '__| | | '_ \  |  _| | |/ _ \
-  *                                                     |  __/ |  | | | (_) | |    | | | | | | | | | |  __/
-  *                                                      \___|_|  |_|  \___/|_|    |_|_| |_| |_| |_|_|\___|
-  * 
-  */
 public class CIS260_York_Homework7_Question2 {
 
-    public static void main(String[] args) {
-        
-        userPrompts(args);
-    }
-
-
-    // ------------------------------------------- RANDOM WORD GENERATOR ------------------------------------------- //
-    public static String wordGenerator(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         System.out.println("");                 // Spacing for terminal visibility
 
+        // ------------------------------------------- RANDOM WORD GENERATOR ------------------------------------------- //
         String[] words = new String[6801];
 
         // Create Word List
@@ -67,36 +51,22 @@ public class CIS260_York_Homework7_Question2 {
         {
             splitWord[i] = Character.toString(word.charAt(i));
         }
-        System.out.println("");  
-                       //Spacing for terminal visibility
-        return word;
-    }
+        System.out.println("");                 //Spacing for terminal visibility
 
-
-    // ------------------------------------------- HIDE WORD FROM USER ------------------------------------------- //
-    public static String coverWord(String[] args) {
-
-        wordGenerator();
+        
+        // ------------------------------------------- HIDE WORD FROM USER ------------------------------------------- //
         // Use asteriks
         String[] coveredSplitWord = new String[word.length()];
 
-        for (int i = 0; i < word.length(); i++) 
+        for (i = 0; i < word.length(); i++) 
         {
             coveredSplitWord[i] = Character.toString(word.charAt(i));
             coveredSplitWord[i] = "*";
             System.out.print(coveredSplitWord[i]);
-            return coveredSplitWord[i];
         }
         System.out.println("");
 
-        
-    }
-
-
-    // ------------------------------------------- USER PROMPTS ------------------------------------------- //
-    public static void userPrompts(String[] args) {
-        word();
-        coverWord();
+        // ------------------------------------------- USER PROMPTS ------------------------------------------- //
 
         int counter = 0;
         
@@ -121,6 +91,7 @@ public class CIS260_York_Homework7_Question2 {
                 counter++;
                 System.out.print(userInput + " is not in the word.");
             }
+            System.out.println(coveredSplitWord);
 
             // nested Loop
             for (int j = 0; j < word.length(); j++) 
@@ -130,7 +101,6 @@ public class CIS260_York_Homework7_Question2 {
                 {
                     // uncover letter
                     coveredSplitWord[j] = userInput;
-        
                 }
             }
 
