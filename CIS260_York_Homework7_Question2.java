@@ -28,7 +28,7 @@ public class CIS260_York_Homework7_Question2 {
             String[] words = new String[6801];
 
             // Create Word List
-            URL text = new URL("http://www.desiquintans.com/downloads/nounlist/nounlist.txt");
+            URL text = new URL("https://www.desiquintans.com/downloads/nounlist/nounlist.txt");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(text.openStream()));
 
